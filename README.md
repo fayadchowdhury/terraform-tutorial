@@ -21,3 +21,27 @@ Instructions can be found at [this link](https://developer.hashicorp.com/terrafo
 ```
 brew install terraform
 ```
+
+## Basic HCL syntax
+
+A basic HCL file consists of repetitions of the following resource:
+
+```
+<block> <parameters> {
+    key1 = value1
+    key2 = value2
+}
+```
+
+Where:
+
+- block - Defines the type of block - resource/argument
+- parameters - May be one or more of resource type (usually of type providerName_resourceName), provider specific arguments etc.
+- key-value pairs - Configuration details (arguments) based on provider and desired state
+
+## Simple Terraform workflow
+
+- Write the declarative configuration file in HCL
+- Init the Terraform project with terraform init
+- Plan the execution with terraform plan
+- Apply the plan with terraform apply
