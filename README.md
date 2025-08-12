@@ -45,3 +45,22 @@ Where:
 - Init the Terraform project with terraform init
 - Plan the execution with terraform plan
 - Apply the plan with terraform apply
+
+## Key commands
+
+- terraform init - Initializes the project and downloads and installs provider plugins (usually mentioned as hostname/organizationalNamespace/plugin as in registry.terraform.io/hashicorp/local) as required to the .terraform/providers directory
+- terraform plan - Generates a plan of execution, outlining the resources to be created and/or destoryed and/or the updates to be made
+- terraform apply - Applies the execution plan
+- terraform destory - Destroys the resource(s) after outlining the items to be deleted
+
+## Provider plugins
+
+Provider plugins are used to interact with infrastructure provisioning platforms and are available on https://registry.terraform.io courtesy of HashiCorp. There are 3 tiers of providers:
+
+- Official providers - Owned and maintained by HashiCorp officially
+- Verified providers - Partners with HashiCorp but managed by 3rd party companies
+- Community providers - Maintained by individual contributors within the community
+
+## Structuring Terraform projects
+
+It is possible to use one or more providers within the same configuration file and to have one or more configuration files overall. It is common practice to have a main.tf file combining all of the configuration info.
