@@ -64,3 +64,30 @@ Provider plugins are used to interact with infrastructure provisioning platforms
 ## Structuring Terraform projects
 
 It is possible to use one or more providers within the same configuration file and to have one or more configuration files overall. It is common practice to have a main.tf file combining all of the configuration info.
+
+## Input variables
+
+It is more sensible to use variables insteac of hardcoding arguments and parameters. Variables may be placed in tf files as well, within the project and can be referred to later as var.variableName. Variables are defined in blocks like:
+
+```
+variable varName {
+    default = default value; optional; can be overridden with -var "variableName=value" in commandline, export TF_VAR_variableName=value or, if missing, will be prompted during terraform plan and apply
+    type = type from string, number, boolean, list, set, map, tuple, object etc.; optional
+    description = description of variable; optional
+}
+```
+
+Variables are also often defined in tfvars files, in which case they are similar to .env files (but they still have to be declared in the main configuration file, otherwise they are not picked up automatically)
+
+```
+variableName = value
+```
+
+If these tfvars files are named terraform.tfvars, terraform.tfvars.json, \*.auto.tfvars or \*.auto.tfvars.json, they are automatically loaded by terraform init. Otherwise they have to be specified with -var-file in the commandline during terraform plan and terraform apply.
+
+If variables are defined in multiple places (cmdline, environment variables, tfvars, auto.tfvars), they are applied in the following hierarchy (topmost gets applied):
+
+1. cmdline
+2. auto.tfvars
+3. tfvars
+4. environment variables
