@@ -91,3 +91,30 @@ If variables are defined in multiple places (cmdline, environment variables, tfv
 2. auto.tfvars
 3. tfvars
 4. environment variables
+
+## Resource attribute references
+
+It is possible to refer to attributes from one resource in another. The best thing to do here is to refer to documentation.
+
+For example for the random_pet resource, the resource itself may be referenced by its name and the name value may be referenced by id as ${random_pet.pet-resource-name.id}
+
+## Resource dependency
+
+Sometimes resources depend on each other implicitly (aptly called an implicit dependency). The resources are created logically in order of the root resource to the dependent resources, and deleted in the reverse order.
+
+It is also possible to define a dependency explicitly (aptly called an explicit dependency) using the depends_on attribute like so:
+
+```
+resource "provider_resource" "resource_name" {
+    key1 = value1
+    ...
+    keyN = valueN
+    depends_on = [
+        provider_resource.resource_name
+        ...
+        provider_resource.resource_name
+    ]
+}
+```
+
+This ensures that the dependent resource is created after the root resource is created, and deleted in the reverse order. This is way to define dependencies if the dependent resource does not reference any variable from the root resource.
