@@ -52,6 +52,8 @@ Where:
 - terraform plan - Generates a plan of execution, outlining the resources to be created and/or destoryed and/or the updates to be made
 - terraform apply - Applies the execution plan
 - terraform destory - Destroys the resource(s) after outlining the items to be deleted
+- terraform output - Shows output variables generated from terraform apply
+- terraform show - Shows the current state as stored in terraform.tfstate in a human-readable format
 
 ## Provider plugins
 
@@ -118,3 +120,16 @@ resource "provider_resource" "resource_name" {
 ```
 
 This ensures that the dependent resource is created after the root resource is created, and deleted in the reverse order. This is way to define dependencies if the dependent resource does not reference any variable from the root resource.
+
+## Output variables
+
+It is possible to output variables generated locally for use elsewhere. The output block is defined as below:
+
+```
+output "output_variable_name" {
+    value = value
+    description = description for the output variable; optional
+}
+```
+
+These are commonly used to pass information to other IAC tools like Ansible or for quick inspection of information from console.
