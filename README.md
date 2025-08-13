@@ -133,3 +133,15 @@ output "output_variable_name" {
 ```
 
 These are commonly used to pass information to other IAC tools like Ansible or for quick inspection of information from console.
+
+## State
+
+Terraform uses state to apply configurations to real-world infrastructure and creates execution plans when drifts arise. It is a single source of truth, a blueprint of sorts, and is usually stored in the terraform.tfstate file in the same directory as the configuration file.
+
+Each resource has an ID that is tracked in the .tfstate file; some metadata specific to the resources are also tracked here. This helps Terraform figure out resource dependencies even when they are removed from the configuration file.
+
+The Terraform state also helps performance in large-scale deployments by caching attributes and referring to changes in those attributes instead of fetching details about every resource provisioned on the platform. This is done by passing the -refresh=false flag to the plan, apply and other state-dependent commands.
+
+It also enables collaboration when people sync to the same terraform.tfstate file stored in an accessible remote store (AWS S3 for example).
+
+The state file also contains sensitive information which should not be uploaded to Github or other VCS. Instead they should be stored on remote state backends (AWS S3, HashiCorp Terraform Cloud etc.)
