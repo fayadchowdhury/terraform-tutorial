@@ -35,7 +35,7 @@ A basic HCL file consists of repetitions of the following resource:
 
 Where:
 
-- block - Defines the type of block - resource/argument
+- block - Defines the type of block - resource/variable/output
 - parameters - May be one or more of resource type (usually of type providerName_resourceName), provider specific arguments etc.
 - key-value pairs - Configuration details (arguments) based on provider and desired state
 
