@@ -52,8 +52,13 @@ Where:
 - terraform plan - Generates a plan of execution, outlining the resources to be created and/or destoryed and/or the updates to be made
 - terraform apply - Applies the execution plan
 - terraform destory - Destroys the resource(s) after outlining the items to be deleted
-- terraform output - Shows output variables generated from terraform apply
-- terraform show - Shows the current state as stored in terraform.tfstate in a human-readable format
+- terraform output - Shows output variables generated from terraform apply; append variable name to print value for specific variable
+- terraform show - Shows the current state of the infrastructure as stored in terraform.tfstate in a human-readable format; use -json to print in JSON format
+- terraform validate - Validates the configuration files and hints at how to fix errors
+- terraform fmt - Scans the configuration files in the current directory and formats them intp canonical format to standardize them and make them more readable
+- terraform providers - Lists all providers used in the current configuration directory
+- terraform refresh - Syncs with real world infrastructure to pick up any changes that happened outside of terraform workflow; also run automatically when commands like terraform plan or terraform apply are run; can be suppressed using -refresh-false flag
+- terraform graph - Generates a dependency graph in JSON or dot that can be passed to graph visualization software like graphviz to draw the graph
 
 ## Provider plugins
 
