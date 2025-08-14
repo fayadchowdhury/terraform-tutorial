@@ -175,3 +175,23 @@ Common rules include:
 - create_before_destory: Create the new resource fully before destroying the existing one
 - prevent_destroy: Prevent changes (other than terraform destroy) that destroy the resource
 - ignore_changes: Takes a list of attributes within the resource whose changes are ignored when computing differnces and execution plan
+
+## Data sources
+
+Data soruces can be used to pull information or state from resources provisioned outside of Terraform (maybe manuall created or using other IAC tools). They are accessed by specifying them as a data source and mapping the type of resource to a Terraform provider resource.
+
+For example, to access a file created outside of Terraform workflows we can use the following:
+
+```
+data "local_file" "resource_name" {
+    filename = "path/to/file"
+}
+```
+
+And then the contents of the file can be accessed using resource attribute references like so:
+
+```
+data.local_file.resource_name.content
+```
+
+It is best to refer to documentation to understand what attributes are exposed when reading data sources.
