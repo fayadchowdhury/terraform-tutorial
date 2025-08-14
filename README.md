@@ -250,3 +250,21 @@ The version string can be:
 - < or <= - less than or less than or equal to the version number specified
 - ~> - pessimistically greater than the version number specified (if 1.2.0 is specified it can look for provider versions from 1.2.1 to 1.2.9 but not 1.3.0 and above)
 - ~< - pessimistically less than the version number specified
+
+## Storing state in remote-state stores
+
+The Terraform state can be stored in remote-state stores (like AWS S3 for example), which can allow better reproducibility and collaboration. This requires a terraform block definition with the backend attribute configured like so:
+
+```
+terraform {
+    backend "s3" {
+        bucket = bucket-name
+        key = key-name
+        region = region-name
+    }
+}
+```
+
+Once that is done, we have to run terraform init again to allow Terraform to store the state file in the specified remote-state store.
+
+Other remote-stores may need to be configured differently.
