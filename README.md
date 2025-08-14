@@ -242,9 +242,9 @@ terraform {
 
 These blocks are usually placed in the main configuration file.
 
-THe version string can be:
+The version string can be:
 
-- == - exact match to version number specified
+- just version number - exact match to version number specified
 - != - not equal to the version number specified (anything but that version number)
 - \> or >= - greater than or greater than or equal to the version number specified
 - < or <= - less than or less than or equal to the version number specified
