@@ -150,3 +150,28 @@ The Terraform state also helps performance in large-scale deployments by caching
 It also enables collaboration when people sync to the same terraform.tfstate file stored in an accessible remote store (AWS S3 for example).
 
 The state file also contains sensitive information which should not be uploaded to Github or other VCS. Instead they should be stored on remote state backends (AWS S3, HashiCorp Terraform Cloud etc.)
+
+## Mutable vs immutable infrastructure
+
+Mutable infrastructure is infrastructure that can be modified or mutated in place. The problem with that approach when applying terraform configurations is partial updates - or situations where the modification did not go through fully because of abnormalities, and future updates or modifications may fail too (configuration drift may arise too). That is why Terraform takes an immutable infrastructure approach - perform modifications on a completely new provision itself (don't upgrade, create a new version and decommission old version). This is a better approach but can fail for applications that maintain state within the provisioned infra itself.
+
+## Lifecycle rules
+
+These are rules written in the form of resource blocks and placed inside resource blocks too that govern the lifecycle of the resource. This is done as follows:
+
+```
+resource provider_resource resource_name {
+    key1 = val1
+    ...
+    keyN = valN
+    lifecycle {
+        rule = true/false
+    }
+}
+```
+
+Common rules include:
+
+- create_before_destory: Create the new resource fully before destroying the existing one
+- prevent_destroy: Prevent changes (other than terraform destroy) that destroy the resource
+- ignore_changes: Takes a list of attributes within the resource whose changes are ignored when computing differnces and execution plan
