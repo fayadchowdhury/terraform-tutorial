@@ -195,3 +195,30 @@ data.local_file.resource_name.content
 ```
 
 It is best to refer to documentation to understand what attributes are exposed when reading data sources.
+
+## Meta-arguments - for_each
+
+depends_on and lifecycle_rules are two kinds of meta-arguments that have already been discussed. Another meta-argument is for_each which allows looping over a map or set variable. This can be particularly useful for creating multiple resources of the same type.
+
+For example, if we want to create N files within the same resource block, we can first define a variable and set its values to a type set like so:
+
+```
+variable "filenames" {
+    type = set(string)
+    default = [
+        "file1Name",
+        ...
+        "fileNName"
+    ]
+}
+```
+
+Next, we can define a resource block of local_file type to create the files accordingly, like so:
+
+```
+resource "local_file" "files" {
+    filename = each.value
+    content = "${each.value} content"
+    for_each = var.filenames
+}
+```
