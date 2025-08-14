@@ -222,3 +222,31 @@ resource "local_file" "files" {
     for_each = var.filenames
 }
 ```
+
+## Version constraints
+
+It is possible to specify which versions of a provider may be used in the Terraform project using a block like so:
+
+```
+terraform {
+    required_providers {
+        provider_name = {
+            source = "source_as_specified_in_registry"
+            version = "version_string"
+        }
+    }
+}
+
+# Rest of configuration
+```
+
+These blocks are usually placed in the main configuration file.
+
+THe version string can be:
+
+- == - exact match to version number specified
+- != - not equal to the version number specified (anything but that version number)
+- \> or >= - greater than or greater than or equal to the version number specified
+- < or <= - less than or less than or equal to the version number specified
+- ~> - pessimistically greater than the version number specified (if 1.2.0 is specified it can look for provider versions from 1.2.1 to 1.2.9 but not 1.3.0 and above)
+- ~< - pessimistically less than the version number specified
