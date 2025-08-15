@@ -59,6 +59,11 @@ Where:
 - terraform providers - Lists all providers used in the current configuration directory
 - terraform refresh - Syncs with real world infrastructure to pick up any changes that happened outside of terraform workflow; also run automatically when commands like terraform plan or terraform apply are run; can be suppressed using -refresh-false flag
 - terraform graph - Generates a dependency graph in JSON or dot that can be passed to graph visualization software like graphviz to draw the graph
+- terraform state list - List all resources managed by Terraform for this configuration
+- terraform state show resource_type.resource_name - List the details of the resource specified by resource_type and resource_name
+- terraform state mv resource_type_1.resource_name_1 resource_type_2.resource_name_2 - Move resource specified by resource_type_1 and resource_name_1 to resource_type_2 and resource_name_2
+- terraform state rm resource_type.resource_name - Remove the resource specified by resource_type and resource_name from Terraform's state so that it is no longer managed by Terraform
+- terraform import resource_type.resource_name id_of_resource - Adds the resource specified by resource_type and resource_name and id_of_resource to the Terraform state so that it can be managed by Terraform that point onwards
 
 ## Provider plugins
 
@@ -268,3 +273,7 @@ terraform {
 Once that is done, we have to run terraform init again to allow Terraform to store the state file in the specified remote-state store.
 
 Other remote-stores may need to be configured differently.
+
+## Import
+
+Terraform can also be used to manage resources that have already been provisioned (different from data sources, which pulls information from the deployed resources).
